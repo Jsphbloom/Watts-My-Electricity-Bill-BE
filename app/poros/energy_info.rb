@@ -6,7 +6,7 @@ class EnergyInfo
               :efficiency_index, :coordinates, :num_residents,
               :zip_code, :zip_res_rate, :zip_ind_rate, :zip_comm_rate,
               :state_ind_rate, :state_ind_average, :state_comm_average,
-              :average_state_rate, :state_res_average 
+              :average_state_rate, :state_res_average, :zipcode
   attr_writer :zip_res_rate, :zip_ind_rate, :zip_comm_rate,
               :state, :state_res_average, :state_ind_average, :state_comm_average,
               :average_state_rate
@@ -14,7 +14,7 @@ class EnergyInfo
   def initialize(user_search_data)
     #Assume very simple clean structure for now.  THIS MIGHT CHANGE LATER.
     @residence_name = user_search_data[:nickname]
-    @zip_code = user_search_data[:zipcode].to_i #Determine/associate later (API call - might be outside MVP too)
+    @zip_code = user_search_data[:zip_code].to_i #Determine/associate later (API call - might be outside MVP too)
     @residence_type = user_search_data[:residence_type]
     @num_residents = user_search_data[:num_residents]
     @efficiency_index = user_search_data[:efficiency_level]
@@ -35,6 +35,7 @@ class EnergyInfo
     #Returns EnergyInfo object will fully sanitized and calculated data, ready for rendering/other
     
     residence_data = self.new(user_search_data)
+    require 'pry'; binding.pry
     rate = CsvHelper.price_by_zip(residence_data.zip_code)
 
     residence_data.zip_res_rate = rate[:residential]

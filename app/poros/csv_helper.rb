@@ -20,6 +20,7 @@ class CsvHelper
 
   def self.price_by_zip(zipcode)
     zip_data = @data.select { |area| area.zipcode == zipcode.to_i }
+    require 'pry'; binding.pry
     zip_data[0].state
     {
       residential: zip_data[0].res_rate,

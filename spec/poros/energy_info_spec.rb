@@ -11,8 +11,7 @@ RSpec.describe "EnergyInfo object (non-model)" do
           residence_type: "apartment",         #Not really, but need valid data
           num_residents: 2,
           efficiency_level: 1,
-          latitude: 41.9,
-          longitude: -91.5
+          zip_code: 80236
         }
 
         energy_info = EnergyInfo.new(search_data)
@@ -22,8 +21,7 @@ RSpec.describe "EnergyInfo object (non-model)" do
         expect(energy_info.residence_type).to eq("apartment")
         expect(energy_info.num_residents).to eq(2)
         expect(energy_info.efficiency_index).to eq(1)
-        expect(energy_info.coordinates[:latitude]).to eq(41.9)
-        expect(energy_info.coordinates[:longitude]).to eq(-91.5)
+        expect(energy_info.zip_code).to eq(80236)
       end
 
       #Check analyze_energy_and_cost() method (once external APIs exist and data can be stubbed)
